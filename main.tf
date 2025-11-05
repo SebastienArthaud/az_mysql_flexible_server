@@ -55,7 +55,14 @@ resource "azurerm_mysql_flexible_server" "mysql_flexible_server" {
   }
 }
 
-
+resource "azurerm_mysql_flexible_server_active_directory_administrator" "mysql_entraid_admin" {
+  count       = var.enable_entra_id_authentication == true ? 1 : 0
+  identity_id = var.user_assigned_identity_id
+  object_id   = var.entra_id_admin_object_id
+  login       = var.entra_id_admin_user_principal_name
+  server_id   = azurerm_mysql_flexible_server.mysql_flexible_server.id
+  tenant_id   = var.tenant_id
+}
 resource "azurerm_mysql_flexible_database" "mysql_flexible_server_databases" {
   for_each            = var.databases
   name                = each.value.name

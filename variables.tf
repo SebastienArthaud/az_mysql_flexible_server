@@ -158,3 +158,36 @@ variable "firewall_rules" {
   DESCRIPTION
   default     = {}
 }
+
+
+variable "tenant_id" {
+  type        = string
+  description = "Tenant ID variable"
+  default     = "f30ac191-b8b4-45f2-9a9b-e5466cb90c2f"
+}
+
+variable "enable_entra_id_authentication" {
+  type        = bool
+  description = "active ou non l'authentiication Entra ID sur le MySQL Flexible server"
+  default     = false
+}
+
+variable "entra_id_admin_object_id" {
+  type        = string
+  description = <<DESCRIPTION
+    Object ID de lobjet entra ID qui autre les droits admin sur le MySQL server si
+    l'authentification entra ID est activée
+    Peut être un utilisateur seulement.
+  DESCRIPTION
+  default     = null
+}
+
+variable "entra_id_admin_user_principal_name" {
+  type        = string
+  description = <<DESCRIPTION
+    User Principal Name de lobjet entra ID qui autre les droits admin sur le MySQL server si
+    l'authentification entra ID est activée
+    Peut être un utilisateur (User Principal Name)
+  DESCRIPTION
+  default     = null
+}
